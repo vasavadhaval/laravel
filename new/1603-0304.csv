@@ -1,0 +1,30 @@
+Week,Date,Topic,Description
+Week 1,16/03/2024,Backend Development - Vehicle Type Module,"Design database schema for vehicle types."
+Week 1,17/03/2024,Backend Development - Vehicle Type Module,"Implement backend API endpoints for CRUD operations on vehicle types."
+Week 1,18/03/2024,Backend Development - Vehicle Type Module,"Develop backend logic for editing and deleting vehicle types."
+
+Week 2,19/03/2024,Backend Development - Vehicle Location Module,"Design database schema for vehicle locations."
+Week 2,20/03/2024,Backend Development - Vehicle Location Module,"Implement backend API endpoints for CRUD operations on vehicle locations."
+Week 2,21/03/2024,Backend Development - Vehicle Location Module,"Develop backend logic for editing and deleting vehicle locations."
+
+Week 3,22/03/2024,Backend Development - Add Vehicle Module,"Design database schema for vehicles."
+Week 3,23/03/2024,Backend Development - Add Vehicle Module,"Implement backend API endpoints for adding, editing, and deleting vehicles."
+Week 3,24/03/2024,Backend Development - Add Vehicle Module,"Integrate vehicle type and location functionalities."
+
+Week 4,25/03/2024,Backend Development - Add User Module,"Design database schema for users."
+Week 4,26/03/2024,Backend Development - Add User Module,"Implement backend API endpoints for adding, editing, and deleting users."
+Week 4,27/03/2024,Backend Development - Add User Module,"Implement authentication and authorization functionalities."
+
+Week 5,28/03/2024,Frontend Development,"Design and develop the home page UI with a section displaying available cars."
+Week 5,29/03/2024,Frontend Development,"Implement 'Book Now' buttons for each car and link them to the details page."
+Week 5,30/03/2024,Frontend Development,"Create a dropdown menu in the navigation bar to display all vehicle types."
+Week 5,31/03/2024,Frontend Development,"Implement functionality to filter vehicles based on selected type."
+Week 5,01/04/2024,Frontend Development,"Design and develop the checkout page UI for booking vehicles."
+Week 5,02/04/2024,Frontend Development,"Implement integration with payment gateway (Razorpay) for secure payments."
+Week 5,03/04/2024,Frontend Development,"Store booking information in the database and handle booking confirmation."
+
+Week 5,04/04/2024,Frontend Development - User Profile Page,"Design and develop the user profile page UI for managing user information."
+Week 5,05/04/2024,Frontend Development - User Profile Page,"Implement functionality to change password in the user profile."
+Week 6,06/04/2024,Frontend Development - Login Page,"Design and develop the 'Forgot Password' feature in the login page."
+Week 6,07/04/2024,Frontend Development - Login Page,"Implement 'Forgot Password' functionality to allow users to reset their passwords."
+
