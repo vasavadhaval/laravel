@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\BookingRequestReceived;
+use Illuminate\Support\Facades\Mail;
 class PaymentController extends Controller
 {
     public function createOrder(Request $request)
@@ -39,6 +40,8 @@ class PaymentController extends Controller
             'payment_status' => $paymentStatus, // Set the initial booking status
 
         ]);
+    // Send email confirmation to the user
+    Mail::to(Auth::user()->email)->send(new BookingRequestReceived(Auth::user(), $booking));
 
 
         // Redirect the user to a success page or any other desired destination

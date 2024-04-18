@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/bookings/today', [AdminController::class, 'todayBookings'])->name('admin.bookings.today');
 
     Route::prefix('admin/vehicles')->name('admin.vehicles.')->group(function () {
         Route::get('/', [VehicleController::class, 'index'])->name('index');
@@ -132,6 +133,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/', [BookingController::class, 'index'])->name('index');
         Route::delete('/{id}', [BookingController::class, 'destroy'])->name('destroy');
         Route::get('/{id}', [BookingController::class, 'show'])->name('show');
+        Route::put('/{booking}/change-status', [BookingController::class, 'changeStatus'])->name('changeStatus');
+
     });
 });
 Route::middleware('auth')->group(function () {

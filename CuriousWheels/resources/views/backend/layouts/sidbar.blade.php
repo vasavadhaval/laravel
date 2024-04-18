@@ -27,7 +27,7 @@
 
 
             </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2">CW</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -189,12 +189,12 @@
             <li class="menu-item{{ request()->is('user/bookings*') ? ' active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-car"></i>
-                    <div class="text-truncate" data-i18n="Bookings">My Bookings</div>
+                    <div class="text-truncate" data-i18n="My Bookings">My Bookings</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item{{ request()->is('user/bookings') ? ' active' : '' }}">
                         <a href="{{ route('user.bookings.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Booking List">My Booking List</div>
+                            <div class="text-truncate" data-i18n="My Booking List">My Booking List</div>
                         </a>
                     </li>
                     <!-- You can add more submenu items for bookings here if needed -->

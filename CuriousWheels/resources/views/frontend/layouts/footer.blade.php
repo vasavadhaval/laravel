@@ -19,6 +19,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var pickupLocationSelect = document.getElementById('pickup_location');
         var customLocationCheckbox = document.getElementById('custom_location_checkbox');
+        var checked_value = 0;
 
         customLocationCheckbox.addEventListener('change', function() {
             if (this.checked) {
@@ -31,7 +32,10 @@
                 if (customPickupLocationInput) {
                     customPickupLocationInput.parentNode.removeChild(customPickupLocationInput);
                 }
+                checked_value = 1;
             } else {
+                checked_value = 0;
+
                 @if(!empty($vehicle))
 
                 // If checkbox is unchecked, disable the dropdown for pickup location
@@ -83,17 +87,21 @@
             // var amount = {{ $vehicle->price * 100 }}; // Initial amount without any modifications
 
             // Function to handle checkbox change
-            function handleCheckboxChange() {
-                if (customLocationCheckbox.checked) {
+            function handleCheckboxChange(checked_value,amount) {
+                if (checked_value) {
                     amount += 2000; // Add 20 to the amount if checkbox is checked
                 } else {
                     amount = amount; // Reset amount if checkbox is unchecked
                 }
+                return amount ; // Convert amount to paisa for Razorpay
+
             }
             document.getElementById('rzp-button').onclick = function(e) {
 
                 var amount = calculateAmount();
-                handleCheckboxChange();
+                amount  = handleCheckboxChange(checked_value,amount);
+
+                document.getElementById('total_cost').value = amount;
                 console.log('amount',amount);
                 // Validate form fields
                 var pickupLocation = document.getElementById('pickup_location');
@@ -140,6 +148,7 @@
                     contact: '{{ auth()->user()->phone }}' // Prefill customer phone with logged-in user's phone (if available)
                 },
                 handler: function(response) {
+                    console.log(response);
                     document.getElementById('payment_id').value = response.razorpay_payment_id;
                     // On successful payment, submit the form data to the backend
                     var form = document.getElementById('booking-form');

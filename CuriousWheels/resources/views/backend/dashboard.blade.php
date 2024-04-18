@@ -41,6 +41,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="d-flex align-items-end row">
+                            <div class="col-sm-12">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Today's Bookings Count</h5>
+                                    <p class="mb-4">Total bookings today: <span class="fw-medium">{{ $todayBookingsCount }}</span></p>
+
+                                    <!-- Link to view today's bookings -->
+                                    <a href="{{ route('admin.bookings.today') }}" class="btn btn-sm btn-label-primary">View Today's Bookings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 

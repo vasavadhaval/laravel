@@ -66,7 +66,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="date" class="form-control" name="start_date" placeholder="Start Date" required="required">
+                                        <input type="date" class="form-control" name="start_date" placeholder="dd-mm-yyyy" required="required" min="1997-01-01" max="2030-12-31">
                                     </div>
                                     <div class="form-group">
                                         <input type="date" class="form-control" name="end_date" placeholder="End Date" required="required">

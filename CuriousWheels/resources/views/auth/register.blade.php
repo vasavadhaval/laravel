@@ -127,11 +127,6 @@
 
     <!-- / Content -->
 
-    <div class="buy-now">
-        <a href="http://127.0.0.1:8000//item/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now">Buy Now</a>
-    </div>
-
-
 
 
     <!-- Core JS -->

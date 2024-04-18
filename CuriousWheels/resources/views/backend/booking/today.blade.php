@@ -10,12 +10,13 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="py-3 mb-0">
-                    <span class="text-muted fw-light">Bookings /</span> All Bookings <!-- Change the title here -->
+                    <span class="text-muted fw-light">Bookings /</span> Today's Bookings
                 </h4>
             </div>
 
             <!-- DataTable with Buttons -->
             <div class="card">
+
                 <div class="card-datatable table-responsive">
                     <table class="datatables-basic table border-top" id="myTable">
                         <thead>
@@ -31,12 +32,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if ($bookings->isEmpty())
+                        @if ($todayBookings->isEmpty())
                             <tr>
                                 <td colspan="8" class="text-center">No bookings available</td>
                             </tr>
                         @else
-                            @foreach ($bookings as $booking)
+                            @foreach ($todayBookings as $booking)
                                 <tr>
                                     <td>{{ $booking->id }}</td>
                                     <td>{{ $booking->vehicle->make }}</td>

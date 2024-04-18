@@ -15,6 +15,8 @@ class Booking extends Model
         'booking_status',
         'total_cost',
         'payment_id',
+        'is_custom_location',
+        'payment_status',
     ];
 
     public function vehicle()
