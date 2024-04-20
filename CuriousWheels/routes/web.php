@@ -153,6 +153,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     });
 
 });
+Route::get('bookings/{booking}/download-invoice', [BookingController::class, 'downloadInvoice'])->name('bookings.downloadInvoice');
+
 Route::middleware(['auth', 'role:driver'])->group(function () {
     Route::get('/driver/dashboard', [loginriverController::class, 'index'])->name('driver.dashboard');
 });

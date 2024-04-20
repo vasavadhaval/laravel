@@ -8,6 +8,7 @@ use App\Mail\BookingRequestConfirmation;
 use App\Mail\BookingRequestRejection;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 
 class BookingController extends Controller
 {
@@ -74,6 +75,30 @@ class BookingController extends Controller
 
         return back()->with('success', 'Booking status updated successfully.');
     }
+    public function downloadInvoice($bookingId)
+    {
+        $booking = Booking::findOrFail($bookingId);
 
+        // Load HTML template for invoice
+        $html = view('backend.invoices.booking_invoice', compact('booking'))->render();
+
+        // Initialize Dompdf
+        $dompdf = new Dompdf();
+
+        // Load HTML content
+        $dompdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF (output)
+        $dompdf->render();
+
+        // Generate a unique file name using the booking ID and current date
+        $pdfFileName = 'booking_' . $booking->id . '_' . date('Y-m-d') . '.pdf';
+
+        // Stream the PDF with the custom file name
+        return $dompdf->stream($pdfFileName);
+    }
 
 }

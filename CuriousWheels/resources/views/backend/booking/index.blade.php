@@ -50,26 +50,29 @@
                                             @if ($user && $user->hasRole('admin'))
                                             <a href="{{ route('admin.bookings.show', $booking->id) }}" class="item-show"><i class='bx bx-show'></i></a>
                                             <a href="javascript:;" class="item-delete text-danger" data-id="{{ $booking->id }}"><i class='bx bx-trash-alt'></i></a>
+                                            <a href="{{ route('bookings.downloadInvoice', $booking->id) }}" class="item-download mr-2"><i class="bx bx-download"></i></a>
 
                                                 @if ($booking->booking_status != 'accepted' && $booking->booking_status != 'rejected')
                                                     <form action="{{ route('admin.bookings.changeStatus', $booking->id) }}" method="POST" class="d-inline">
                                                         @csrf
                                                         @method('PUT')
                                                         <input type="hidden" name="status" value="accepted"> <!-- Hidden input for accept status -->
-                                                        <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                                        <a href="#" class=" text-success  submit_form"><i class="bx bx-check"></i></a>
+
                                                     </form>
                                                     <form action="{{ route('admin.bookings.changeStatus', $booking->id) }}" method="POST" class="d-inline">
                                                         @csrf
                                                         @method('PUT')
                                                         <input type="hidden" name="status" value="rejected"> <!-- Hidden input for reject status -->
-                                                        <button type="submit" class="btn btn-danger btn-sm pl-1">Reject</button>
+                                                        <a href="#" class="text-danger  pl-1 reject_form"><i class="bx bx-x"></i></a>
                                                     </form>
                                                 @endif
                                             @endif
                                             @if ($user && $user->hasRole('user'))
                                                 <a href="{{ route('user.bookings.show', $booking->id) }}" class="item-show"><i class='bx bx-show'></i></a>
-                                            @endif
+                                                <a href="{{ route('bookings.downloadInvoice', $booking->id) }}" class="item-download mr-2"><i class="bx bx-download"></i></a>
 
+                                            @endif
                                         </div>
 
                                     </td>
@@ -120,6 +123,15 @@
                             alert('An error occurred while deleting the booking: ' + error);
                         }
                     });
+                }
+            });
+            $('.reject_form').click(function(event) {
+                event.preventDefault();
+                var form = $(this).closest('form');
+                if (form.length > 0) {
+                    form.submit();
+                } else {
+                    console.error('Form not found!');
                 }
             });
         });
