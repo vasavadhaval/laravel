@@ -64,7 +64,11 @@
                 if (rentalPricingModel == 'Per Hour') {
                     // Calculate amount based on hours
                     var startDate = new Date(document.getElementById('start_date').value);
+
+                    console.log(startDate);
                     var endDate = new Date(document.getElementById('end_date').value);
+                    console.log(endDate);
+
                     var hoursDifference = Math.abs(endDate - startDate) / 36e5; // Difference in hours
                     amount = hoursDifference * {{ $vehicle->price }}; // Multiply hours with price per hour
                     // console.log('amount dhaval');
@@ -180,6 +184,48 @@
         };
     </script>
 @endauth
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  // Function to open modal when either input field is clicked
+  document.getElementById('start_date').addEventListener('click', openModal);
+  document.getElementById('end_date').addEventListener('click', openModal);
+
+  function openModal() {
+    $('#exampleModal').modal('show');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var fp = flatpickr("#flatpickr-datetime-range", {
+      mode: "range", // Enable date range selection
+      enableTime: true, // Enable time selection
+      inline: true, // Show the calendar inline
+      dateFormat: "Y-m-d H:i", // Date format (year-month-day hour:minute)
+      onChange: function(selectedDates, dateStr, instance) {
+
+      }
+    });
+
+    // Clear input fields when Clear button is clicked
+    document.getElementById('clearBtn').addEventListener('click', function() {
+      document.getElementById('startDateInput').value = '';
+      document.getElementById('endDateInput').value = '';
+      fp.clear(); // Clear Flatpickr selection
+      $('#exampleModal').modal('hide'); // Hide modal
+    });
+
+    // Update input fields when Apply button is clicked
+    document.getElementById('applyBtn').addEventListener('click', function() {
+      var selectedDates = fp.selectedDates;
+      if (selectedDates[1]) { // Check if end date is selected
+        document.getElementById('start_date').value = selectedDates[0] ? fp.formatDate(selectedDates[0], 'Y-m-d H:i') : '';
+        document.getElementById('end_date').value = selectedDates[1] ? fp.formatDate(selectedDates[1], 'Y-m-d H:i') : '';
+        $('#exampleModal').modal('hide'); // Hide modal
+      } else {
+        alert("Please select an end date."); // Display error message
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

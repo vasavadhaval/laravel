@@ -80,7 +80,7 @@ body {
 
 section,
 .section {
-    position: relative;
+    /* position: relative; */
 }
 
 .container {

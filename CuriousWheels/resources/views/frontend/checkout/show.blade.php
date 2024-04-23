@@ -81,6 +81,25 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered " style="    max-width: 341px;" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Date and Time Range Selector</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div id="flatpickr-datetime-range"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" id="clearBtn">Clear</button>
+                      <button type="button" class="btn btn-primary" id="applyBtn">Apply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             <!-- Form Section -->
             <div class="col-lg-6">
@@ -129,18 +148,17 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="start_date" class="form-label">Start Date</label>
-                                    <input type="date" id="start_date" name="start_date" class="form-control" required>
+                                    <input type="text" id="start_date" name="start_date" class="form-control" placeholder="Start Date" required>
                                     <!-- Danger message span for start date -->
                                     <span id="start-date-error" class="text-danger d-none">Please enter a start date.</span>
                                 </div>
                                 <div class="col-12">
                                     <label for="end_date" class="form-label">End Date</label>
-                                    <input type="date" id="end_date" name="end_date" class="form-control" required>
+                                    <input type="text" id="end_date" name="end_date" class="form-control" placeholder="End Date" required>
                                     <!-- Danger message span for end date -->
                                     <span id="end-date-error" class="text-danger d-none">Please enter an end date.</span>
                                 </div>
                             </div>
-
                             <div class="d-grid mt-4">
                                 <button type="button" class="btn btn-primary btn-lg" id="rzp-button">Proceed to Payment</button>
                             </div>
@@ -152,6 +170,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 @include('frontend.layouts.sitefooter')
