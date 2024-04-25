@@ -20,6 +20,7 @@ class Vehicle extends Model
         'availability',
         'description',
         'price',
+        'price_perday',
         'rental_pricing_model',
         'image_url',
         'location',

@@ -21,24 +21,28 @@ class PaymentController extends Controller
         $validatedData = $request->validate([
             'vehicle_id' => 'required|exists:vehicles,id',
             'pickup_location' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'start_date' => 'required|date_format:d M Y H:i', // Format: DD MMM YYYY HH:mm
+            'end_date' => 'required|date_format:d M Y H:i|after:start_date', // Format: DD MMM YYYY HH:mm and must be after start_date
         ]);
+
         $paymentStatus = $request->payment_id != '' ? 'paid' : 'pending';
+
+        // Create a new booking instance
+        $start_date = date('Y-m-d H:i:s', strtotime($request->start_date));
+        $end_date = date('Y-m-d H:i:s', strtotime($request->end_date));
 
         // Create a new booking instance
         $booking = Booking::create([
             'vehicle_id' => $request->vehicle_id,
-            'user_id' => Auth::id(), // Get the authenticated user's ID
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'user_id' => Auth::id(),
+            'start_date' => $start_date,
+            'end_date' => $end_date,
             'is_custom_location' => $request->is_custom_location,
-            'pickup_location' =>  $request->pickup_location , // Wrap the pickup location in quotes
-            'booking_status' => 'pending', // Set the initial booking status
-            'payment_id' => $request->payment_id , // Set the initial booking status
-            'total_cost' => $request->total_cost , // Set the initial booking status
-            'payment_status' => $paymentStatus, // Set the initial booking status
-
+            'pickup_location' => $request->pickup_location,
+            'booking_status' => 'pending',
+            'payment_id' => $request->payment_id,
+            'total_cost' => $request->total_cost,
+            'payment_status' => $paymentStatus,
         ]);
     // Send email confirmation to the user
     Mail::to(Auth::user()->email)->send(new BookingRequestReceived(Auth::user(), $booking));

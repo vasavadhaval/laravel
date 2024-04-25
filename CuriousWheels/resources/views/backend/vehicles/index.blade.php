@@ -24,7 +24,8 @@
                                 <th>Model</th>
                                 <th>Year</th>
                                 <th>Type</th>
-                                <th>Price</th>
+                                <th>Price Per Hour</th>
+                                <th>Price Per Day</th>
                                 <th>Fuel Type</th>
                                 <th>Transmission</th>
                                 <th>Mileage</th>
@@ -42,7 +43,8 @@
                                     <td>{{ $vehicle->model }}</td>
                                     <td>{{ $vehicle->year }}</td>
                                     <td>{{ $vehicle->vehicleType->name }}</td>
-                                    <td>₹ {{ $vehicle->price }}/  {{ $vehicle->rental_pricing_model }}</td>
+                                    <td>₹ {{ $vehicle->price }}/  Per Hour</td>
+                                    <td>₹ {{ $vehicle->price_perday }}/  Per Day</td>
                                     <td>{{ $vehicle->fuel_type }}</td>
                                     <td>{{ $vehicle->transmission }}</td>
                                     <td>{{ $vehicle->mileage }}</td>

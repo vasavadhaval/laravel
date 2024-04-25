@@ -1,7 +1,11 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-
+<style>
+    .flatpickr-day.flatpickr-disabled {
+  background-color: #f5d0d0; /* Light red color */
+}
+</style>
 <!-- ***** Breadcrumb Area Start ***** -->
 <section class="section breadcrumb-area bg-overlay d-flex align-items-center blog">
     <div class="container">
@@ -72,8 +76,11 @@
                                         <td>{{ $vehicle->mileage }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Price</th>
-                                        <td>₹ {{ $vehicle->price }} / {{ $vehicle->rental_pricing_model }}</td>
+                                        <th scope="row">Price Per Hour</th>
+                                        <td>₹ {{ $vehicle->price }} / Per Hour</td>
+                                    </tr>                                    <tr>
+                                        <th scope="row">Price Per Day</th>
+                                        <td>₹ {{ $vehicle->price_perday }} / Price Per Day</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -146,6 +153,18 @@
                         <!-- Hidden input field for custom location -->
                         <input type="text" id="custom_pickup_location" name="custom_pickup_location" class="form-control d-none">
                             <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Rental Pricing Model</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rental_pricing_model" id="per_hour" value="Per Hour" checked>
+                                        <label class="form-check-label" for="per_hour">Per Hour</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rental_pricing_model" id="per_day" value="Per Day">
+                                        <label class="form-check-label" for="per_day">Per Day</label>
+                                    </div>
+                                </div>
+
                                 <div class="col-12">
                                     <label for="start_date" class="form-label">Start Date</label>
                                     <input type="text" id="start_date" name="start_date" class="form-control" placeholder="Start Date" required>

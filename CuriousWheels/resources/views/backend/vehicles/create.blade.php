@@ -116,10 +116,14 @@
                             <div class="card-body">
                                 <!-- Price -->
                                 <div class="mb-3">
-                                    <label class="form-label" for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="Vehicle Price" required>
+                                    <label class="form-label" for="price">Price Per Hour</label>
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="Vehicle Per Hour Price" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="price">Price Per Day</label>
+                                    <input type="number" class="form-control" id="price_perday" name="price_perday" placeholder="Vehicle Per Day Price" required>
+                                </div>
+                                <div class="mb-3 d-none">
                                     <select class="form-control" name ="rental_pricing_model" id="pricingModelSelect">
                                         <option value="Per Hour">Per Hour</option>
                                         <option value="Per Day">Per Day</option>

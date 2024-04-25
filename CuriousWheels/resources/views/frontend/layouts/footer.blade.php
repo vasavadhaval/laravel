@@ -55,30 +55,39 @@
             }
         });
         @if(!empty($vehicle))
-        var rentalPricingModel = '{{ $vehicle->rental_pricing_model }}';
+        var rentalPricingModel = document.querySelector('input[name="rental_pricing_model"]:checked').value;
         var amount = 0;
 
         function calculateAmount() {
+        var rentalPricingModel = document.querySelector('input[name="rental_pricing_model"]:checked').value;
 
             console.log(rentalPricingModel);
                 if (rentalPricingModel == 'Per Hour') {
                     // Calculate amount based on hours
-                    var startDate = new Date(document.getElementById('start_date').value);
+                var startDate = new Date(document.getElementById('start_date').value);
+                // console.log(startDate);
+                var endDate = new Date(document.getElementById('end_date').value);
+                // console.log(endDate);
+                var hoursDifference = Math.abs(endDate - startDate) / 36e5;
 
-                    console.log(startDate);
-                    var endDate = new Date(document.getElementById('end_date').value);
-                    console.log(endDate);
+                console.log(hoursDifference);
 
-                    var hoursDifference = Math.abs(endDate - startDate) / 36e5; // Difference in hours
-                    amount = hoursDifference * {{ $vehicle->price }}; // Multiply hours with price per hour
+                amount = hoursDifference * {{ $vehicle->price }}; // Multiply hours with price per hour
                     // console.log('amount dhaval');
 
                 } else if (rentalPricingModel == 'Per Day') {
                     // Calculate amount based on days
                     var startDate = new Date(document.getElementById('start_date').value);
+                    console.log(startDate);
+
                     var endDate = new Date(document.getElementById('end_date').value);
+                    console.log(endDate);
+
                     var daysDifference = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)); // Difference in days
-                    amount = daysDifference * {{ $vehicle->price }}; // Multiply days with price per day
+
+                    console.log(daysDifference);
+
+                    amount = daysDifference * {{ $vehicle->price_perday }}; // Multiply days with price per day
                 } else {
                     // Default calculation for other pricing models
                     amount = {{ $vehicle->price }}; // Default price
@@ -195,14 +204,24 @@
     $('#exampleModal').modal('show');
   }
   document.addEventListener('DOMContentLoaded', function() {
-    var fp = flatpickr("#flatpickr-datetime-range", {
-      mode: "range", // Enable date range selection
-      enableTime: true, // Enable time selection
-      inline: true, // Show the calendar inline
-      dateFormat: "Y-m-d H:i", // Date format (year-month-day hour:minute)
-      onChange: function(selectedDates, dateStr, instance) {
 
-      }
+    @if(isset($formattedBookedDates))
+        var bookedDates = @json($formattedBookedDates);
+    @else
+        var bookedDates = [];
+    @endif
+    // Rest of your Flatpickr initialization code with `disable` option:
+
+    var fp = flatpickr("#flatpickr-datetime-range", {
+        mode: "range",
+        enableTime: true,
+        inline: true,
+        dateFormat: "Y-m-d",
+        minDate: new Date().setDate(new Date().getDate() + 1), // Minimum date is tomorrow
+        disable: bookedDates, // Use the formatted bookedDates array
+        onChange: function(selectedDates, dateStr, instance) {
+            // ... your code for handling selected dates
+        }
     });
 
     // Clear input fields when Clear button is clicked
@@ -217,8 +236,8 @@
     document.getElementById('applyBtn').addEventListener('click', function() {
       var selectedDates = fp.selectedDates;
       if (selectedDates[1]) { // Check if end date is selected
-        document.getElementById('start_date').value = selectedDates[0] ? fp.formatDate(selectedDates[0], 'Y-m-d H:i') : '';
-        document.getElementById('end_date').value = selectedDates[1] ? fp.formatDate(selectedDates[1], 'Y-m-d H:i') : '';
+        document.getElementById('start_date').value = selectedDates[0] ? fp.formatDate(selectedDates[0], 'd M Y H:i') : '';
+        document.getElementById('end_date').value = selectedDates[1] ? fp.formatDate(selectedDates[1], 'd M Y H:i') : '';
         $('#exampleModal').modal('hide'); // Hide modal
       } else {
         alert("Please select an end date."); // Display error message

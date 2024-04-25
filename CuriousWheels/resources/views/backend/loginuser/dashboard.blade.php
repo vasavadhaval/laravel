@@ -8,14 +8,52 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
 
-
             <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="card">
+                  <div class="d-flex align-items-end row">
+                    <div class="col-sm-12">
+                      <div class="card-body">
+                        <h5 class="card-title text-primary">Your Bookings Count</h5>
+                        <p class="mb-4">Total bookings you have made: <span class="fw-medium">{{ $todayBookingsCount }}</span></p>
+
+                        <a href="{{ route('user.bookings.index') }}" class="btn btn-sm btn-label-primary">View Your Bookings</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-12">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary">Your Documents ({{ $totalDocuments }})</h5>
+
+                          @if (count($documents) > 0)
+                            <ul class="list-group">
+                              @foreach ($documents as $document)
+                                <li class="list-group-item">
+                                  {{ $document->title }} ({{ $document->created_at->format('d M Y') }})
+                                  <a href="{{ $document->file_path }}" class="btn btn-sm btn-primary float-end">View</a>
+                                </li>
+                              @endforeach
+                            </ul>
+                          @else
+                            <p>You don't have any documents uploaded yet.</p>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
-
-        </div>
-        <!-- / Content -->
+          </div>
 
 
 

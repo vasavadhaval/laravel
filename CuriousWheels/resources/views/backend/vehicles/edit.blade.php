@@ -118,10 +118,14 @@
                             <div class="card-body">
                                 <!-- Price -->
                                 <div class="mb-3">
-                                    <label class="form-label" for="price">Price</label>
+                                    <label class="form-label" for="price">Per Hour</label>
                                     <input type="number" class="form-control" id="price" name="price" value="{{ $vehicle->price }}" required>
-                                </div>
+                                </div>|
                                 <div class="mb-3">
+                                    <label class="form-label" for="price">Price Per Day</label>
+                                    <input type="number" class="form-control" id="price_perday" name="price_perday" value="{{ $vehicle->price_perday }}" required>
+                                </div>
+                                <div class="mb-3 d-none">
                                     <select class="form-control" name="rental_pricing_model" id="pricingModelSelect">
                                         <option value="Per Hour" {{ $vehicle->rental_pricing_model == "Per Hour" ? 'selected' : '' }}>Per Hour</option>
                                         <option value="Per Day" {{ $vehicle->rental_pricing_model == "Per Day" ? 'selected' : '' }}>Per Day</option>

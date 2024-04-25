@@ -215,7 +215,8 @@
                         <!-- Card Body -->
                         <div class="card-body py-4">
                             <h3>{{ $vehicle->make }} {{ $vehicle->model }}</h3>
-                            <h4 class="text-primary py-2">₹ {{ $vehicle->price }} / {{ $vehicle->rental_pricing_model }}</h4>
+                            <h4 class="text-primary py-2">₹ {{ $vehicle->price }} / per hour</h4>
+                            <h4 class="text-primary py-2">₹ {{ $vehicle->price_perday }} / per day</h4>
                             <!-- Product Features -->
                             <div class="product-features">
                                 <span class="badge bg-label-primary">Year: {{ $vehicle->year }}</span>

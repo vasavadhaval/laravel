@@ -8,10 +8,12 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\loginUserController;
+use App\Http\Controllers\UserDocumentController;
 
 
 use App\Http\Controllers\VehicleLocationController;
@@ -75,11 +77,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/user-documents', [UserDocumentController::class, 'store']);
+    Route::get('/user-documents', [UserDocumentController::class, 'index']);
+
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
+
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/bookings/today', [AdminController::class, 'todayBookings'])->name('admin.bookings.today');
+
+    Route::get('admin/all-documents', [UserDocumentController::class, 'allDocuments']);
+    Route::put('admin/documents/{documentId}/approval-status', [UserDocumentController::class, 'updateApprovalStatus']);
 
     Route::prefix('admin/vehicles')->name('admin.vehicles.')->group(function () {
         Route::get('/', [VehicleController::class, 'index'])->name('index');
@@ -129,6 +140,27 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
         Route::get('/{id}', [BlogController::class, 'show'])->name('show');
     });
+    Route::prefix('admin/document-types')->name('admin.document_types.')->group(function () {
+        Route::get('/', [DocumentTypeController::class, 'index'])->name('index');
+        Route::get('/create', [DocumentTypeController::class, 'create'])->name('create');
+        Route::post('/store', [DocumentTypeController::class, 'store'])->name('store');
+        Route::get('/{documentType}/edit', [DocumentTypeController::class, 'edit'])->name('edit');
+        Route::put('/{documentType}', [DocumentTypeController::class, 'update'])->name('update');
+        Route::delete('/{documentType}', [DocumentTypeController::class, 'destroy'])->name('destroy');
+        // Optional route for showing a document type (if needed)
+        // Route::get('/{documentType}', [DocumentTypeController::class, 'show'])->name('show');
+    });
+
+    Route::prefix('admin/user-documents')->name('admin.user_documents.')->group(function () {
+        Route::get('/', [UserDocumentController::class, 'index'])->name('index');
+        Route::get('/create', [UserDocumentController::class, 'create'])->name('create');
+        Route::post('/store', [UserDocumentController::class, 'store'])->name('store');
+        Route::get('/{user_document}/edit', [UserDocumentController::class, 'edit'])->name('edit');
+        Route::put('/{user_document}', [UserDocumentController::class, 'update'])->name('update');
+        Route::delete('/{user_document}', [UserDocumentController::class, 'destroy'])->name('destroy');
+        // Optional route for showing a user document (if needed)
+        // Route::get('/{user_document}', [UserDocumentController::class, 'show'])->name('show');
+    });
     Route::prefix('admin/bookings')->name('admin.bookings.')->group(function () {
         Route::get('/', [BookingController::class, 'index'])->name('index');
         Route::delete('/{id}', [BookingController::class, 'destroy'])->name('destroy');
@@ -150,6 +182,14 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/', [BookingController::class, 'userindex'])->name('index');
         Route::delete('/{id}', [BookingController::class, 'userdestroy'])->name('destroy');
         Route::get('/{id}', [BookingController::class, 'usershow'])->name('show');
+    });
+    Route::prefix('user/documents')->name('user.documents.')->group(function () {
+        Route::get('/', [UserDocumentController::class, 'user_index'])->name('index');
+        Route::get('/create', [UserDocumentController::class, 'user_create'])->name('create');
+        Route::post('/store', [UserDocumentController::class, 'user_store'])->name('store');
+        Route::get('/{user_document}/edit', [UserDocumentController::class, 'user_edit'])->name('edit');
+        Route::put('/{user_document}', [UserDocumentController::class, 'user_update'])->name('update');
+        Route::delete('/{user_document}', [UserDocumentController::class, 'user_destroy'])->name('destroy');
     });
 
 });

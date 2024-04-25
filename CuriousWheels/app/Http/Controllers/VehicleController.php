@@ -36,6 +36,7 @@ class VehicleController extends Controller
             'availability' => 'required|boolean',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'price_perday' => 'required|numeric',
             'rental_pricing_model' => 'required|string|max:255',
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate uploaded image
             'location' => 'nullable|string|max:255',
@@ -92,6 +93,7 @@ class VehicleController extends Controller
             'availability' => 'required|boolean',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'price_perday' => 'required|numeric',
             'rental_pricing_model' => 'required|string|max:255',
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate uploaded image
             'location' => 'nullable|string|max:255',
@@ -111,7 +113,19 @@ class VehicleController extends Controller
             $avatarPath = $request->file('image_url')->store('vehicles_img', 'my_storage');
             $validatedData['image_url'] = url(Storage::disk('my_storage')->url($avatarPath));
         }
-        // Update the vehicle with the new data
+        // $pricePerHour = $validatedData['price'];
+
+        // $discountRate = 0.1; // Defaults to 0 if no discount provided
+
+        // $dailyChargeWithoutDiscount = $pricePerHour * 24;
+
+        // $discountAmount = $dailyChargeWithoutDiscount * $discountRate;
+
+        // $dailyChargeWithDiscount = $dailyChargeWithoutDiscount - $discountAmount;
+
+        // $validatedData['price_perday'] = $dailyChargeWithDiscount;
+
+        // $vehicle->update($validatedData);
         $vehicle->update($validatedData);
 
         // Redirect to the vehicle index page with a success message

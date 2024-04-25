@@ -152,6 +152,45 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="menu-item{{ request()->is('admin/document-types*') ? ' active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-file"></i>  <div class="text-truncate" data-i18n="Document Types">Document Types</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item{{ request()->is('admin/document-types') ? ' active' : '' }}">
+                    <a href="{{ route('admin.document_types.index') }}" class="menu-link">
+                      <div class="text-truncate" data-i18n="Document Type List">Document Type List</div>
+                    </a>
+                  </li>
+                  <li class="menu-item{{ request()->is('admin/document-types/create') ? ' active' : '' }}">
+                    <a href="{{ route('admin.document_types.create') }}" class="menu-link">
+                      <div class="text-truncate" data-i18n="Add Document Type">Add Document Type</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="menu-item{{ request()->is('admin/user-documents*') ? ' active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div class="text-truncate" data-i18n="User Documents">User Documents</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item{{ request()->is('admin/user-documents') ? ' active' : '' }}">
+                        <a href="{{ route('admin.user_documents.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="User Document List">User Document List</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is('admin/user-documents/create') ? ' active' : '' }}">
+                        <a href="{{ route('admin.user_documents.create') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Add User Document">Add User Document</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
             <!-- Add this code snippet where you define your admin menu -->
 
             <li class="menu-item{{ request()->is('admin/bookings*') ? ' active open' : '' }}">
@@ -198,6 +237,25 @@
                         </a>
                     </li>
                     <!-- You can add more submenu items for bookings here if needed -->
+                </ul>
+            </li>
+            <li class="menu-item{{ request()->is('user/documents*') ? ' active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div class="text-truncate" data-i18n="My Documents">My Documents</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item{{ request()->is('user/documents') ? ' active' : '' }}">
+                        <a href="{{ route('user.documents.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="My Document List">My Document List</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is('user/documents/create') ? ' active' : '' }}">
+                        <a href="{{ route('user.documents.create') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Create Document">Create Document</div>
+                        </a>
+                    </li>
+                    <!-- You can add more submenu items for user documents here if needed -->
                 </ul>
             </li>
 
